@@ -17,6 +17,7 @@ class DetailItem : AppCompatActivity() {
     private lateinit var rvGenre : RecyclerView
     private lateinit var rvGameplay : RecyclerView
     private lateinit var genreGameArrayList : ArrayList<String>
+    private lateinit var gamePlayGameArrayList : ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,7 @@ class DetailItem : AppCompatActivity() {
         val devGame = bundle!!.getString("developerGame")
         val pubGame = bundle!!.getString("publisherGame")
         val genreGame = bundle!!.getStringArrayList("genreGame")
-        val imgGameplayGame = bundle!!.getInt("imgGameplayGame")
+        val imgGameplayGame = bundle!!.getIntegerArrayList("imgGameplayGame")
 
         detailGameImg.setImageResource(imgGame)
         titleGameTxt.text = titleGame
@@ -60,18 +61,31 @@ class DetailItem : AppCompatActivity() {
             finish()
         }
 
+        // RecyclerView Genre Game
         rvGenre = binding.rvGenreGame
         rvGenre.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true)
 
         genreGameArrayList = arrayListOf<String>()
-        Log.d("Cek",genreGame.toString())
         if (genreGame != null) {
             for (i in genreGame){
                 genreGameArrayList.add(i)
             }
         }
-        var adapter = RecyclerViewGenreAdapter(genreGameArrayList)
-        rvGenre.adapter = adapter
+        var adapterGenre = RecyclerViewGenreAdapter(genreGameArrayList)
+        rvGenre.adapter = adapterGenre
+
+        // RecyclerView Gameplay Game
+        rvGameplay = binding.rvGameplayGame
+        rvGameplay.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true)
+
+        gamePlayGameArrayList = arrayListOf<Int>()
+        if (imgGameplayGame != null) {
+            for (i in imgGameplayGame){
+                gamePlayGameArrayList.add(i)
+            }
+        }
+        var adapterGameplay = RecyclerViewGameplayAdapter(gamePlayGameArrayList)
+        rvGameplay.adapter = adapterGameplay
     }
 
     override fun onBackPressed() {

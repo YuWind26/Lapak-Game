@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         >
         <ImageView
-            android:id="@+id/detail_game_img"
+            android:id="@+id/gameplay_game_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
